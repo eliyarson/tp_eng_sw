@@ -44,6 +44,7 @@ public class Zona {
     public void checaSensores() {
         // Loopa os sensores
         Integer valorSensor = 0;
+        this.estado = Estado.CHECANDO;
         for (int i = 0; i < sensores.size(); i++) {
             // checa sensor
             Boolean status = sensores.get(i).checaSensor();
@@ -59,7 +60,7 @@ public class Zona {
         if (valorSensor == -1) {
             this.estado = Estado.SEM_FOGO;
         } else {
-            this.estado = Estado.SEM_FOGO;
+            this.estado = Estado.CHECANDO;
         }
 
     }
