@@ -1,3 +1,5 @@
+package com.example.project;
+
 import java.util.List;
 
 public class Zona {
@@ -41,7 +43,7 @@ public class Zona {
     }
 
     // Métodos
-    public void checaSensores() {
+    public Boolean checaSensores() {
         // Loopa os sensores
         Integer valorSensor = 0;
         this.estado = Estado.CHECANDO;
@@ -53,12 +55,14 @@ public class Zona {
             }
         }
 
-        // TODO: implementar classe sensor
-
         if (valorSensor == 0) {
             this.estado = Estado.SEM_FOGO;
+            return false;
         } else if (valorSensor > 1) {
             this.estado = Estado.FOGO;
+            return true;
+        } else {
+            return false;
         }
 
     }

@@ -1,3 +1,5 @@
+package com.example.project;
+
 public class Sensor {
     private Integer idSensor;
 

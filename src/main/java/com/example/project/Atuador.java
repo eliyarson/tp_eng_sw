@@ -1,3 +1,5 @@
+package com.example.project;
+
 public class Atuador {
     private Integer id;
     private Boolean ativado;
