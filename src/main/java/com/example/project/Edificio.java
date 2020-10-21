@@ -57,17 +57,17 @@ public class Edificio {
         for (int i = 0; i < zonas.size(); i++) {
             Zona zona = zonas.get(i);
             Integer idZona = zona.getId();
-            zona.checaSensores();
+            Boolean fogo = zona.checaSensores();
             Boolean atuador = zona.checaAtuadores();
-            Estado estadoZona = zona.getEstado();
-            if (estadoZona == Estado.FOGO) {
+
+            if (fogo == true) {
                 tocaSirene();
                 ativaIndicadores();
                 combateIncendio(idZona);
                 if (zona.getCritico() == true) {
                     acionaEmergencia();
                 }
-            } else if (estadoZona == Estado.SEM_FOGO && atuador == true) {
+            } else if (fogo == false && atuador == true) {
                 zona.desativaAtuadores();
             }
         }
