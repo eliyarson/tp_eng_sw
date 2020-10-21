@@ -49,18 +49,16 @@ public class Zona {
             // checa sensor
             Boolean status = sensores.get(i).checaSensor();
             if (status == true) {
-                this.estado = Estado.FOGO;
-                break;
-            } else {
-                valorSensor = -1;
+                valorSensor++;
             }
         }
+
         // TODO: implementar classe sensor
 
-        if (valorSensor == -1) {
+        if (valorSensor == 0) {
             this.estado = Estado.SEM_FOGO;
-        } else {
-            this.estado = Estado.CHECANDO;
+        } else if (valorSensor > 1) {
+            this.estado = Estado.FOGO;
         }
 
     }

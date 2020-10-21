@@ -59,7 +59,12 @@ public class Edificio {
             zona.checaSensores();
             Estado estadoZona = zona.getEstado();
             if (estadoZona == Estado.FOGO) {
+                tocaSirene();
+                ativaIndicadores();
                 combateIncendio(idZona);
+                if (zona.getCritico() == true) {
+                    acionaEmergencia();
+                }
             }
         }
     }
