@@ -57,6 +57,7 @@ public class Edificio {
             Zona zona = zonas.get(i);
             Integer idZona = zona.getId();
             zona.checaSensores();
+            Boolean atuador = zona.checaAtuadores();
             Estado estadoZona = zona.getEstado();
             if (estadoZona == Estado.FOGO) {
                 tocaSirene();
@@ -65,6 +66,8 @@ public class Edificio {
                 if (zona.getCritico() == true) {
                     acionaEmergencia();
                 }
+            } else if (estadoZona == Estado.SEM_FOGO && atuador == true) {
+                zona.desativaAtuadores();
             }
         }
     }

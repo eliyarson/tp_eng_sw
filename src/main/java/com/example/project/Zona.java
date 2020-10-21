@@ -63,6 +63,12 @@ public class Zona {
 
     }
 
+    public Boolean checaAtuadores() {
+        // Retorna True se atuador Ativo
+        // Falso se inativo
+        return false;
+    }
+
     public void ativaAtuadores() {
         // Ativa atuador.
         // Se pessoas
@@ -71,6 +77,10 @@ public class Zona {
         } else {
             // ativa atuadores
         }
+    }
+
+    public void desativaAtuadores() {
+        // Desliga atuadores
     }
 
     public Boolean temPessoas() {
