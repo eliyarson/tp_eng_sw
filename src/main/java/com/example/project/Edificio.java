@@ -59,17 +59,25 @@ public class Edificio {
             Integer idZona = zona.getId();
             Boolean sensor = zona.checaSensores();
             Boolean atuador = zona.checaAtuadores();
+            Estado estadoZona = zona.getEstado();
 
-            if (sensor == true) {
-                tocaSirene();
-                ativaIndicadores();
-                combateIncendio(idZona);
-                if (zona.getCritico() == true) {
-                    acionaEmergencia();
+            if (estadoZona == Estado.FOGO) {
+                if (sensor == true) {
+                    tocaSirene();
+                    ativaIndicadores();
+                    combateIncendio(idZona);
+                    if (zona.getCritico() == true) {
+                        acionaEmergencia();
+                    }
+
+                } else if (sensor == false && atuador == true) {
+                    zona.desativaAtuadores();
                 }
-            } else if (sensor == false && atuador == true) {
-                zona.desativaAtuadores();
+
+            } else if (estadoZona == Estado.INVASAO) {
+                combateInvasao(idZona);
             }
+
         }
     }
 
@@ -89,5 +97,8 @@ public class Edificio {
     public void combateIncendio(Integer idZona) {
         // Liga os sprinklers
         // Passa o ID da Zna
+    }
+
+    public void combateInvasao(Integer idZona) {
     }
 }
