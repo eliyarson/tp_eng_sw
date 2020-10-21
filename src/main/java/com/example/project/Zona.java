@@ -48,10 +48,12 @@ public class Zona {
         Integer valorSensor = 0;
         this.estado = Estado.CHECANDO;
         for (int i = 0; i < sensores.size(); i++) {
-            // checa sensor
-            Boolean status = sensores.get(i).checaSensor();
-            if (status == true) {
+            Sensor sensor = sensores.get(i);
+            Boolean status = sensor.checaSensor();
+            if (status == true && sensor instanceof Incendio) {
                 valorSensor++;
+            } else if (status == true && sensor instanceof Invasao) {
+                valorSensor = -1;
             }
         }
 
@@ -60,6 +62,9 @@ public class Zona {
             return false;
         } else if (valorSensor > 1) {
             this.estado = Estado.FOGO;
+            return true;
+        } else if (valorSensor < 0) {
+            this.estado = Estado.INVASAO;
             return true;
         } else {
             return false;

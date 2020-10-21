@@ -1,5 +1,5 @@
 package com.example.project;
 
 public enum Estado {
-    FOGO, SEM_FOGO, CHECANDO
+    FOGO, SEM_FOGO, CHECANDO, INVASAO
 }
