@@ -1,15 +1,18 @@
 package com.example.project;
 
 public class PortaAutomatica extends Atuador {
-    public PortaAutomatica(Integer _id, Boolean _ativado) {
-        super(_id, _ativado);
+
+    public PortaAutomatica(Integer _id, Boolean _ativo) {
+        super(_id);
+        this.ativo = _ativo;
     }
 
-    public void abre() {
-
+    public void ativa() {
+        this.ativo = true;
     }
 
-    public void fecha() {
-
+    public void desativa() {
+        this.ativo = false;
     }
+
 }

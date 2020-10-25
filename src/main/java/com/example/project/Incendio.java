@@ -8,7 +8,6 @@ public class Incendio extends Sensor {
     }
 
     public Boolean checaSensor() {
-        Boolean status = this.status;
-        return status;
+        return this.status;
     }
 }

@@ -1,14 +1,17 @@
 package com.example.project;
 
 public class Sprinkler extends Atuador {
-    public Sprinkler(Integer _id, Boolean _ativado) {
-        super(_id, _ativado);
+    public Sprinkler(Integer _id, Boolean _ativo) {
+        super(_id);
+        this.ativo = _ativo;
     }
 
-    public void Ativa() {
+    public void ativa() {
+        this.ativo = true;
     }
 
-    public void Desativa() {
-
+    public void desativa() {
+        this.ativo = false;
     }
+
 }

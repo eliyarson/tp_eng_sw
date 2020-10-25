@@ -10,12 +10,15 @@ public class Edificio {
     private String nome;
     private List<Zona> zonas;
     private Estado estado;
+    private Boolean temIndicadoresDeEmergencia;
 
     // Construtor da Classe
-    public Edificio(Integer _id, String _nome, List<Zona> _zonas) {
+    public Edificio(Integer _id, String _nome, List<Zona> _zonas, Estado _estado, Boolean _temIndicadores) {
         this.id = _id;
         this.nome = _nome;
         this.zonas = _zonas;
+        this.estado = _estado;
+        this.temIndicadoresDeEmergencia = _temIndicadores;
     }
 
     // Métodos
@@ -56,49 +59,59 @@ public class Edificio {
     public void verificaZonas() {
         for (int i = 0; i < zonas.size(); i++) {
             Zona zona = zonas.get(i);
-            Integer idZona = zona.getId();
-            Boolean sensor = zona.checaSensores();
             Boolean atuador = zona.checaAtuadores();
-            Estado estadoZona = zona.getEstado();
+            Estado estadoZona = zona.checaSensores();
+            Boolean pessoas = zona.getPessoas();
 
-            if (estadoZona == Estado.FOGO) {
-                if (sensor == true) {
-                    tocaSirene();
-                    ativaIndicadores();
-                    combateIncendio(idZona);
+            switch (estadoZona) {
+
+                case CHECANDO:
+                    break;
+                case FOGO:
+                    tocaAlarmeIncendio(zona);
+                    ativaIndicadoresEmergencia();
                     if (zona.getCritico() == true) {
                         acionaEmergencia();
                     }
+                    if (pessoas == false) {
+                        combateIncendio(zona);
+                    }
+                    break;
+                case INVASAO:
+                    combateInvasao(zona);
+                    break;
+                case SEM_FOGO:
+                    if (atuador == true) {
+                        zona.desativaAtuadores();
+                    }
+                    break;
 
-                } else if (sensor == false && atuador == true) {
-                    zona.desativaAtuadores();
-                }
-
-            } else if (estadoZona == Estado.INVASAO) {
-                combateInvasao(idZona);
             }
 
         }
     }
 
-    public static void tocaSirene() {
-        // Toca Sirene
+    public void tocaAlarmeIncendio(Zona zona) {
+        zona.ativaAlarmes();
     }
 
     public static void acionaEmergencia() {
         // Liga para 193
     }
 
-    public void ativaIndicadores() {
-        // Ligar os Sinalizadores de Caminho
-        // Passa o ID da Zona e aciona
+    public void ativaIndicadoresEmergencia() {
+        if (temIndicadoresDeEmergencia) {
+            // ativa
+        } else {
+        }
     }
 
-    public void combateIncendio(Integer idZona) {
-        // Liga os sprinklers
-        // Passa o ID da Zna
+    public void combateIncendio(Zona zona) {
+        zona.ativaAtuadores();
     }
 
-    public void combateInvasao(Integer idZona) {
+    public void combateInvasao(Zona zona) {
+        // Dispara Alarme de Invasao
+        // Chama a Policia
     }
 }
