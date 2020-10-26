@@ -57,7 +57,6 @@ public class Zona {
 
     // Métodos
     public Estado checaSensores() {
-        // Loopa os sensores
         Integer valorSensor = 0;
         this.estado = Estado.CHECANDO;
         for (int i = 0; i < sensores.size(); i++) {
